@@ -1,22 +1,19 @@
-import * as React from "react"
+import { ComponentProps } from "react"
+import clsx from "clsx"
 
-import { cn } from "@/lib/utils"
+type InputProps = ComponentProps<"input"> & {
+  variant?: "minimalist" | "outline"
+}
 
-const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
-  ({ className, type, ...props }, ref) => {
-    return (
-      <input
-        type={type}
-        className={cn(
-          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
-)
-Input.displayName = "Input"
-
-export { Input }
+export function Input({ variant = "outline", ...props }: InputProps) {
+  return (
+    <div
+      className={clsx("flex-1 rounded-3xl p-2", {
+        "border border-green-700 w-full": variant === "outline",
+        "border border-zinc-300 rounded-xl": variant === "minimalist",
+      })}
+    >
+      <input {...props} className="flex-1 w-full outline-none" />
+    </div>
+  )
+}
