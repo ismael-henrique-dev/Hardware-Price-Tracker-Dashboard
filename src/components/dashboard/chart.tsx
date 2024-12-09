@@ -8,7 +8,6 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts"
-import { ChartConfig, ChartContainer } from "../ui/chart"
 
 const chartData = [
   { month: "Jul", succeeded: 120, failed: 30 },
@@ -18,17 +17,15 @@ const chartData = [
   { month: "Nov", succeeded: 80, failed: 100 },
 ]
 
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "#22c55e",
-  },
-} satisfies ChartConfig
+interface PayloadItem {
+  fill: string
+  value: number
+}
 
 interface CustomTooltipProps {
-  active: boolean
-  payload: Record<string, number>[]
-  label: string
+  active?: boolean
+  payload?: PayloadItem[]
+  label?: string
 }
 
 const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
@@ -47,41 +44,39 @@ const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
 
 export function ChartArea() {
   return (
-    <div className="flex flex-col gap-10 h-full">
-      <div className="w-full">
-        <ChartContainer config={chartConfig} className="h-full">
-          <BarChart
-            data={chartData}
-            margin={{
-              top: 20,
-              right: 20,
-              left: 0,
-              bottom: 20,
-            }}
-          >
-            <XAxis
-              dataKey="month"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={10}
-            />
-            <YAxis tickLine={false} axisLine={false} />
-            <Tooltip content={<CustomTooltip />} />
-            <Bar
-              dataKey="succeeded"
-              fill="#22c55e"
-              radius={[8, 8, 0, 0]}
-              barSize={44}
-            />
-            <Bar
-              dataKey="failed"
-              fill="#ef4444"
-              radius={[8, 8, 0, 0]}
-              barSize={44}
-            />
-          </BarChart>
-        </ChartContainer>
-      </div>
+    <div className="flex-1 w-full h-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart
+          data={chartData}
+          margin={{
+            top: 20,
+            right: 20,
+            left: 0,
+            bottom: 20,
+          }}
+        >
+          <XAxis
+            dataKey="month"
+            tickLine={false}
+            axisLine={false}
+            tickMargin={10}
+          />
+          <YAxis tickLine={false} axisLine={false} />
+          <Tooltip content={<CustomTooltip />} />
+          <Bar
+            dataKey="succeeded"
+            fill="#22c55e"
+            radius={[8, 8, 0, 0]}
+            barSize={44}
+          />
+          <Bar
+            dataKey="failed"
+            fill="#ef4444"
+            radius={[8, 8, 0, 0]}
+            barSize={44}
+          />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   )
 }

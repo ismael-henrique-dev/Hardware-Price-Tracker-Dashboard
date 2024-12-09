@@ -9,7 +9,7 @@ export function Input({ variant = "outline", ...props }: InputProps) {
   return (
     <div
       className={clsx("flex-1 rounded-3xl p-2", {
-        "border border-green-700 w-full": variant === "outline",
+        "border border-slate-300 bg-transparent rounded-xl": variant === "outline",
         "border border-zinc-300 rounded-xl": variant === "minimalist",
       })}
     >

@@ -4,23 +4,43 @@ import { SummaryCard } from "@/components/dashboard/summary-card"
 
 export default function Dashboard() {
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-semibold">Dashboard</h1>
-      <div className="grid grid-cols-4 gap-4 mb-8">
-        <SummaryCard />
-        <SummaryCard />
-        <SummaryCard />
-        <SummaryCard />
+    <div className="px-8 flex-1 flex flex-col m-auto w-full">
+      <h1 className="text-2xl font-semibold mb-10">Dashboard</h1>
+      <div className="grid grid-cols-3 gap-4 mb-8">
+        <SummaryCard
+          variant="total"
+          title="Total de coletas"
+          value={1200}
+          percentage={10.1}
+        />
+        <SummaryCard
+          variant="success"
+          title="Sucedidas"
+          value={900}
+          percentage={10.1}
+        />
+        <SummaryCard
+          variant="fail"
+          title="Falharam"
+          value={200}
+          percentage={10.1}
+        />
+        {/* <SummaryCard
+          variant="scheduled"
+          title="Agendadas"
+          value={100}
+          percentage={10.1}
+        /> */}
       </div>
 
       <div className="grid grid-cols-3 gap-8">
-        <section className="col-span-2 bg-white border border-zinc-300 rounded-lg p-6">
+        <section className="col-span-2 bg-white border border-zinc-300 rounded-2xl p-6 flex-1">
           <ChartArea />
         </section>
 
-        <section className="bg-white border border-zinc-300 rounded-lg px-4 py-6">
+        <section className="bg-white border border-zinc-300 rounded-2xl px-4 py-6 h-fit">
           <h4 className="text-base font-semibold ">Últimas coletas</h4>
-          <ul className="flex flex-col gap-6">
+          <ul className="flex flex-col gap-1">
             {Array.from({ length: 5 }).map((_, index) => (
               <li key={index}>
                 <CollectCard
