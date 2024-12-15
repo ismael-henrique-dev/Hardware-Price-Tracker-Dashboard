@@ -1,5 +1,5 @@
 import { ChartArea } from "@/components/dashboard/chart"
-import { CollectCard } from "@/components/dashboard/collect-card"
+import { LatestCollections } from "@/components/dashboard/latest-collections"
 import { SummaryCard } from "@/components/dashboard/summary-card"
 
 export default function Dashboard() {
@@ -37,20 +37,7 @@ export default function Dashboard() {
         <section className="col-span-2 bg-white border border-zinc-300 rounded-2xl p-6 flex-1">
           <ChartArea />
         </section>
-
-        <section className="bg-white border border-zinc-300 rounded-2xl px-4 py-6 h-fit">
-          <h4 className="text-base font-semibold ">Últimas coletas</h4>
-          <ul className="flex flex-col gap-1">
-            {Array.from({ length: 5 }).map((_, index) => (
-              <li key={index}>
-                <CollectCard
-                  date="Ontem - 4:00"
-                  collectId="e8a58d8d-f7c8-4441-8d04-d3809f19c5cc"
-                />
-              </li>
-            ))}
-          </ul>
-        </section>
+        <LatestCollections />
       </div>
     </div>
   )

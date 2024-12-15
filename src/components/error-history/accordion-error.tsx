@@ -4,28 +4,56 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { CircleAlert } from "lucide-react"
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+import "dayjs/locale/pt-br"
+dayjs.extend(relativeTime)
+dayjs.locale("pt-br")
 
-export function AccordionError() {
+interface AccordionErrorProps {
+  errorName: string
+  errorDate: string
+  errorId: string
+  errorCollectStore: string
+}
+
+export function AccordionError({
+  errorCollectStore,
+  errorDate,
+  errorName,
+  errorId,
+}: AccordionErrorProps) {
+  const formattedDate = dayjs(errorDate).format("DD MMM YY, h:mma")
+
   return (
-    <Accordion type="single" collapsible className="w-full">
+    <Accordion type="single" collapsible className="w-full shadow-none">
       <AccordionItem value="item-1">
-        <AccordionTrigger>Is it accessible?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It adheres to the WAI-ARIA design pattern.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger>Is it styled?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It comes with default styles that matches the other
-          components&apos; aesthetic.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTrigger>Is it animated?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It&apos;s animated by default, but you can disable it if you
-          prefer.
+        <AccordionTrigger className="px-6 py-4 border border-zinc-300 rounded-2xl">
+          <div className="flex items-center gap-4">
+            <div className="bg-red-100 text-red-700 rounded-full size-10 flex items-center justify-center">
+              <CircleAlert />
+            </div>
+            <strong className="text-base font-semibold">
+              {errorName} - {formattedDate}
+            </strong>
+          </div>
+        </AccordionTrigger>
+        <AccordionContent className="mt-3 px-6 py-4  border border-zinc-300 rounded-2xl">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-2">
+              <strong className="font-semibold">Status:</strong>
+              <span className="text-zinc-600">failed</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <strong className="font-semibold">Id da coleta:</strong>
+              <span className="text-zinc-600">{errorId}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <strong className="font-semibold">Loja:</strong>
+              <span className="text-zinc-600">{errorCollectStore}</span>
+            </div>
+          </div>
         </AccordionContent>
       </AccordionItem>
     </Accordion>

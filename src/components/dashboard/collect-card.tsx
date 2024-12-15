@@ -2,7 +2,7 @@ import { Clock } from "lucide-react"
 
 interface ICollectCardProps {
   date: string
-  collectId: string
+  collectId: number
 }
 
 export function CollectCard({ date, collectId }: ICollectCardProps) {
