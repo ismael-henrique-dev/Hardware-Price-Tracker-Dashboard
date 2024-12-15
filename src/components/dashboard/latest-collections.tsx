@@ -3,7 +3,7 @@ import { CollectCard } from "./collect-card"
 
 export async function LatestCollections() {
   const latestCollections = await fetchScraps()
-  const latestCollectionsList = latestCollections.response
+  const latestCollectionsList = latestCollections.response.ScrapList
 
   return (
     <section className="bg-white border border-zinc-300 rounded-2xl px-4 py-6 h-fit">

@@ -1,8 +1,20 @@
-import { ChartArea } from "@/components/dashboard/chart"
+import { Chart } from "@/components/dashboard/chart/chart"
 import { LatestCollections } from "@/components/dashboard/latest-collections"
 import { SummaryCard } from "@/components/dashboard/summary-card"
 
-export default function Dashboard() {
+interface DashboardParamsType {
+  totalSucceeded: string
+  totalFailed: string
+}
+
+export default function Dashboard({
+  totalSucceeded,
+  totalFailed,
+}: DashboardParamsType) {
+  const totalCollectsSucceeded = Number(totalSucceeded) || 0
+  const totalCollectsFailed = Number(totalFailed) || 0
+  const totalCollectsByMonth = totalCollectsSucceeded - totalCollectsFailed
+
   return (
     <div className="px-8 flex-1 flex flex-col m-auto w-full">
       <h1 className="text-2xl font-semibold mb-10">Dashboard</h1>
@@ -10,20 +22,17 @@ export default function Dashboard() {
         <SummaryCard
           variant="total"
           title="Total de coletas"
-          value={1200}
-          percentage={10.1}
+          value={totalCollectsByMonth}
         />
         <SummaryCard
           variant="success"
           title="Sucedidas"
-          value={900}
-          percentage={10.1}
+          value={totalCollectsSucceeded}
         />
         <SummaryCard
           variant="fail"
           title="Falharam"
-          value={200}
-          percentage={10.1}
+          value={totalCollectsFailed}
         />
         {/* <SummaryCard
           variant="scheduled"
@@ -35,7 +44,7 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-3 gap-8">
         <section className="col-span-2 bg-white border border-zinc-300 rounded-2xl p-6 flex-1">
-          <ChartArea />
+          <Chart />
         </section>
         <LatestCollections />
       </div>

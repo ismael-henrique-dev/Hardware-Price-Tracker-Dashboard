@@ -8,17 +8,17 @@ interface Scrap {
 
 interface FetchScrapsResponse {
   Description: string
-  response: Scrap[]
+  response: {
+    ScrapList: Scrap[]
+  }
   config: {
     PasDays: string
   }
 }
 
-// vou ternar nas ULTIMAS COLETAS
-
 export async function fetchScraps(): Promise<FetchScrapsResponse> {
   try {
-    const { data } = await api.get(`/api/scrap/date/1`)
+    const { data } = await api.get(`/api/scrap/date/30`)
     console.log(data)
 
     return data

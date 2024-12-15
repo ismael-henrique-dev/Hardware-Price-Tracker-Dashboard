@@ -5,11 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { CircleAlert } from "lucide-react"
-import dayjs from "dayjs"
-import relativeTime from "dayjs/plugin/relativeTime"
-import "dayjs/locale/pt-br"
-dayjs.extend(relativeTime)
-dayjs.locale("pt-br")
+import { formatDate } from "@/lib/formatter"
 
 interface AccordionErrorProps {
   errorName: string
@@ -24,8 +20,6 @@ export function AccordionError({
   errorName,
   errorId,
 }: AccordionErrorProps) {
-  const formattedDate = dayjs(errorDate).format("DD MMM YY, h:mma")
-
   return (
     <Accordion type="single" collapsible className="w-full shadow-none">
       <AccordionItem value="item-1">
@@ -35,7 +29,7 @@ export function AccordionError({
               <CircleAlert />
             </div>
             <strong className="text-base font-semibold">
-              {errorName} - {formattedDate}
+              {errorName} - {formatDate(errorDate)}
             </strong>
           </div>
         </AccordionTrigger>

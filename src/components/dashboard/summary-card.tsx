@@ -6,13 +6,11 @@ type SummaryCardProps = {
   variant: SummaryCardVariants
   title: string
   value: number
-  percentage: number
 }
 
 export function SummaryCard({
   variant,
   title,
-  percentage,
   value,
 }: SummaryCardProps) {
   return (
@@ -30,7 +28,7 @@ export function SummaryCard({
       </div>
       <div className="flex flex-col gap-2">
         <strong className="text-2xl font-bold">{value}</strong>
-        <p className="text-xs">{percentage}% do mês passado</p>
+        {/* <p className="text-xs">{percentage}% do mês passado</p> */}
       </div>
     </div>
   )
