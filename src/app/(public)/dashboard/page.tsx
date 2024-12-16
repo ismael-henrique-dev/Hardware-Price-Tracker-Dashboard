@@ -13,12 +13,12 @@ export default function Dashboard({
 }: DashboardParamsType) {
   const totalCollectsSucceeded = Number(totalSucceeded) || 0
   const totalCollectsFailed = Number(totalFailed) || 0
-  const totalCollectsByMonth = totalCollectsSucceeded - totalCollectsFailed
+  const totalCollectsByMonth = totalCollectsSucceeded + totalCollectsFailed
 
   return (
-    <div className="px-8 flex-1 flex flex-col m-auto w-full">
+    <div className="p-8 flex flex-col m-auto w-full h-screen">
       <h1 className="text-2xl font-semibold mb-10">Dashboard</h1>
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid md:grid-cols-3 gap-4 mb-8 grid-cols-1">
         <SummaryCard
           variant="total"
           title="Total de coletas"
@@ -42,7 +42,7 @@ export default function Dashboard({
         /> */}
       </div>
 
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 grid-cols-1 gap-8">
         <section className="col-span-2 bg-white border border-zinc-300 rounded-2xl p-6 flex-1">
           <Chart />
         </section>

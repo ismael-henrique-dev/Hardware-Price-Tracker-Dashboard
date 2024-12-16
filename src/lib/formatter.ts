@@ -15,3 +15,5 @@ export const formatDate = (errorDate: string) => {
 
   return date.format("DD MMM YY, h:mma")
 }
+
+export const formatRelativeDate = (date: string) => dayjs(date).fromNow()

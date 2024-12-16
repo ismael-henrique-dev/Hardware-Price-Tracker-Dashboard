@@ -1,31 +1,21 @@
 "use client"
 
+import { Scrap } from "@/http/fetch-scraps"
+import { formatRelativeDate } from "@/lib/formatter"
 import { ColumnDef } from "@tanstack/react-table"
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Collect = {
-  id: string
-  data: string
-  hora: string
-  status: "pending" | "processing" | "success" | "failed"
-}
-
-export const columns: ColumnDef<Collect>[] = [
+export const columns: ColumnDef<Scrap>[] = [
   {
-    accessorKey: "id",
+    accessorKey: "Id",
     header: "Id da coleta",
   },
   {
-    accessorKey: "data",
+    accessorKey: "CreatedAt",
     header: "Data",
+    cell: ({ row }) => formatRelativeDate(row.original.CreatedAt),
   },
   {
-    accessorKey: "hora",
-    header: "Hora",
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "Scraped",
+    header: "Loja",
   },
 ]

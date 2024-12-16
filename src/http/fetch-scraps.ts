@@ -1,6 +1,6 @@
 import { api } from "@/services/api"
 
-interface Scrap {
+export interface Scrap {
   Id: number
   CreatedAt: string
   Scraped: string
@@ -18,8 +18,7 @@ interface FetchScrapsResponse {
 
 export async function fetchScraps(): Promise<FetchScrapsResponse> {
   try {
-    const { data } = await api.get(`/api/scrap/date/30`)
-    console.log(data)
+    const { data } = await api.get(`/api/scrap/date/30`)  
 
     return data
   } catch (error) {
