@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
-import "./globals.css"
+import "../globals.css"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/app-sidebar"
 
 export const metadata: Metadata = {
   title: "Hardware Price Tracker Dashboard",
@@ -12,7 +14,7 @@ const mainLocalFontFamily = Inter({
   variable: "--font-family-main",
 })
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode
@@ -20,7 +22,11 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${mainLocalFontFamily} antialiased`}>
-        <main>{children}</main>
+        <SidebarProvider>
+          <AppSidebar />
+          <SidebarTrigger />
+          {children}
+        </SidebarProvider>
       </body>
     </html>
   )
