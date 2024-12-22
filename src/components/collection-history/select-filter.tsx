@@ -1,4 +1,4 @@
-import * as React from "react"
+"use client"
 
 import {
   Select,
@@ -9,21 +9,41 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Scrap } from "@/http/fetch-scraps"
+import { useState } from "react"
 
-export function SelectDemo() {
+interface SelectDemoProps {
+  list: Scrap[]
+  updateFilteredList: (filteredList: Scrap[]) => void
+}
+
+export function SelectDemo({ list, updateFilteredList }: SelectDemoProps) {
+  const [store, setStore] = useState<string | null>(null)
+
+  const handleSelect = (value: string | null) => {
+    if (value === store) {
+      setStore(null)
+      updateFilteredList(list)
+    } else {
+      setStore(value)
+      if (value) {
+        const newFilteredList = list.filter((scrap) => scrap.Scraped === value)
+        updateFilteredList(newFilteredList)
+      }
+    }
+  }
+
   return (
-    <Select>
+    <Select onValueChange={handleSelect}>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select a fruit" />
+        <SelectValue placeholder="Selecione uma loja" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Loja</SelectLabel>
-          <SelectItem value="apple">Loja</SelectItem>
-          <SelectItem value="banana">Banana</SelectItem>
-          <SelectItem value="blueberry">Blueberry</SelectItem>
-          <SelectItem value="grapes">Grapes</SelectItem>
-          <SelectItem value="pineapple">Pineapple</SelectItem>
+          <SelectLabel>{store || "Selecione uma loja"}</SelectLabel>
+          <SelectItem value="TeraByte">TeraByte</SelectItem>
+          <SelectItem value="Pichau">Pichau</SelectItem>
+          <SelectItem value="Kabum">Kabum</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
