@@ -18,7 +18,6 @@ interface FetchInssuesResponse {
 export async function fetchInssues(): Promise<FetchInssuesResponse> {
   try {
     const { data } = await api.get(`/api/issues/1`)
-    console.log(data)
 
     return data
   } catch (error) {

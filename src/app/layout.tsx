@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 }
 
 const mainLocalFontFamily = Inter({
+  subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   variable: "--font-family-main",
 })

@@ -1,10 +1,9 @@
 "use client"
 
-import { months } from "@/constants"
+import { months } from "@/constants" // ["jan.", "fev.", "mar.", ..., "dez."]
 import { fetchInssuesByDate } from "@/http/fetch-inssues-by-date"
 import { fetchScraps } from "@/http/fetch-scraps"
 import { useEffect, useState } from "react"
-
 import {
   BarChart,
   Bar,
@@ -33,18 +32,24 @@ export function Chart() {
         const scrapInfo = scrapsResponse.response.ScrapList
         const issues = issuesResponse.response
 
+        // fiz isso para fazer as conversões dos nomes dos meses corretanete
+        const normalizeMonth = (month: string) =>
+          month.charAt(0).toUpperCase() + month.slice(1, 3)
+
         const scrapByMonth = scrapInfo.reduce((acc, scrap) => {
-          const month = new Date(scrap.CreatedAt).toLocaleString("pt-BR", {
-            month: "short",
-          })
+          const month = normalizeMonth(
+            new Date(scrap.CreatedAt).toLocaleString("pt-BR", {
+              month: "short",
+            })
+          )
           acc[month] = (acc[month] || 0) + 1
           return acc
         }, {} as Record<string, number>)
 
         const errorsByMonth = issues.reduce((acc, issue) => {
-          const month = new Date(issue.When).toLocaleString("pt-BR", {
-            month: "short",
-          })
+          const month = normalizeMonth(
+            new Date(issue.When).toLocaleString("pt-BR", { month: "short" })
+          )
           acc[month] = (acc[month] || 0) + 1
           return acc
         }, {} as Record<string, number>)
@@ -55,14 +60,8 @@ export function Chart() {
           failed: errorsByMonth[month] || 0,
         }))
 
-        const totalSucceeded = formattedData.reduce(
-          (acc, curr) => acc + curr.succeeded,
-          0
-        )
-        const totalFailed = formattedData.reduce(
-          (acc, curr) => acc + curr.failed,
-          0
-        )
+        const totalSucceeded = scrapInfo.length
+        const totalFailed = issues.length
 
         params.set("totalSucceeded", totalSucceeded.toString())
         params.set("totalFailed", totalFailed.toString())
@@ -70,18 +69,19 @@ export function Chart() {
 
         setChartData(formattedData)
       } catch (error) {
-        console.error("Erro ao buscar os dados", error)
+        console.error("Error fetching data:", error)
       }
     }
 
     fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <div className="flex-1 w-full h-full">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
-          data={chartData}
+          data={chartData.filter((d) => d.succeeded > 0 || d.failed > 0)} // Only render months with data
           margin={{
             top: 20,
             right: 20,
