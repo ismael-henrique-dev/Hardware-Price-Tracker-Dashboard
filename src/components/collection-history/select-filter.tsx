@@ -18,14 +18,15 @@ interface SelectDemoProps {
 }
 
 export function SelectDemo({ list, updateFilteredList }: SelectDemoProps) {
-  const [store, setStore] = useState<string | null>(null)
+  const [store, setStore] = useState<string>("Todas")
 
-  const handleSelect = (value: string | null) => {
-    if (value === store) {
-      setStore(null)
+  const handleSelect = (value: string | undefined) => {
+    if (value === "Todas") {
+      console.log(`Store: ${value} | value: ${value}`)
+      setStore(value)
       updateFilteredList(list)
     } else {
-      setStore(value)
+      setStore(value as string)
       if (value) {
         const newFilteredList = list.filter((scrap) => scrap.Scraped === value)
         updateFilteredList(newFilteredList)
@@ -34,13 +35,16 @@ export function SelectDemo({ list, updateFilteredList }: SelectDemoProps) {
   }
 
   return (
-    <Select onValueChange={handleSelect}>
+    <Select value={store || ""} onValueChange={handleSelect}>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Selecione uma loja" />
+        <SelectValue placeholder="Selecione uma loja">
+          {store || "Selecione uma loja"}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>{store || "Selecione uma loja"}</SelectLabel>
+          <SelectLabel>Loja</SelectLabel>
+          <SelectItem value="Todas">Todas</SelectItem>
           <SelectItem value="TeraByte">TeraByte</SelectItem>
           <SelectItem value="Pichau">Pichau</SelectItem>
           <SelectItem value="Kabum">Kabum</SelectItem>
