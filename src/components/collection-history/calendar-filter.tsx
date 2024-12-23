@@ -9,8 +9,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { Scrap } from "@/http/fetch-scraps"
+
 import { useState } from "react"
+import { Scrap } from "@/@types/sraplings"
 
 interface DatePickerDemoProps {
   list: Scrap[] 

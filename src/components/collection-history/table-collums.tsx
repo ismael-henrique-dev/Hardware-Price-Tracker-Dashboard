@@ -1,6 +1,6 @@
 "use client"
 
-import { Scrap } from "@/http/fetch-scraps"
+import { Scrap } from "@/@types/sraplings"
 import { formatRelativeDate } from "@/lib/formatter"
 import { ColumnDef } from "@tanstack/react-table"
 

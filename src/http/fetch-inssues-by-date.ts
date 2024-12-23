@@ -1,19 +1,5 @@
+import { FetchInssuesByDateResponse } from "@/@types/inssues"
 import { api } from "@/services/api"
-
-interface Inssue {
-  Id: string
-  When: string
-  Reason: string
-  At: string
-}
-
-interface FetchInssuesByDateResponse {
-  DescriptioN: string
-  response: Inssue[]
-  config: {
-    pasDays: string
-  }
-}
 
 export async function fetchInssuesByDate(): Promise<FetchInssuesByDateResponse> {
   try {

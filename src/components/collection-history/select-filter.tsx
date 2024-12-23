@@ -1,5 +1,6 @@
 "use client"
 
+import { Scrap } from "@/@types/sraplings"
 import {
   Select,
   SelectContent,
@@ -9,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Scrap } from "@/http/fetch-scraps"
+
 import { useState } from "react"
 
 interface SelectDemoProps {

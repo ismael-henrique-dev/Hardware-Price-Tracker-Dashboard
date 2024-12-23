@@ -1,10 +1,11 @@
 "use client"
 
+import { Scrap } from "@/@types/sraplings"
 import { DatePickerDemo } from "@/components/collection-history/calendar-filter"
 import { SelectDemo } from "@/components/collection-history/select-filter"
 import { DataTable } from "@/components/collection-history/table"
 import { columns } from "@/components/collection-history/table-collums"
-import { fetchScraps, Scrap } from "@/http/fetch-scraps"
+import { fetchScraps } from "@/http/fetch-scraps"
 import { useState, useEffect } from "react"
 
 export default function CollectionHistory() {

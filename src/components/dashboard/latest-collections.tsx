@@ -1,8 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { fetchScraps, Scrap } from "@/http/fetch-scraps"
+import { fetchScraps } from "@/http/fetch-scraps"
 import { CollectCard } from "./collect-card"
+import { Scrap } from "@/@types/sraplings"
 
 export function LatestCollections() {
   const [latestCollectionsList, setLatestCollectionsList] = useState<Scrap[]>(
@@ -13,7 +14,11 @@ export function LatestCollections() {
     async function getScraps() {
       try {
         const latestCollections = await fetchScraps()
-        setLatestCollectionsList(latestCollections.response.ScrapList || [])
+        const sortedScraps = (latestCollections.response.ScrapList || []).sort(
+          (a: Scrap, b: Scrap) => new Date(b.CreatedAt).getTime() - new Date(a.CreatedAt).getTime()
+        )
+
+        setLatestCollectionsList(sortedScraps)
       } catch (error) {
         console.error("Error fetching scraps:", error)
         setLatestCollectionsList([])

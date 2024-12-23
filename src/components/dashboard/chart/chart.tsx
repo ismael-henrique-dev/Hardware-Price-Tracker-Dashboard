@@ -1,6 +1,6 @@
 "use client"
 
-import { months } from "@/constants" // ["jan.", "fev.", "mar.", ..., "dez."]
+import { months } from "@/constants" 
 import { fetchInssuesByDate } from "@/http/fetch-inssues-by-date"
 import { fetchScraps } from "@/http/fetch-scraps"
 import { useEffect, useState } from "react"
@@ -81,7 +81,7 @@ export function Chart() {
     <div className="flex-1 w-full h-full">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
-          data={chartData.filter((d) => d.succeeded > 0 || d.failed > 0)} // Only render months with data
+          data={chartData.filter((d) => d.succeeded > 0 || d.failed > 0)}
           margin={{
             top: 20,
             right: 20,
