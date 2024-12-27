@@ -15,9 +15,9 @@ O Hardware Price Tracker é uma plataforma online desenvolvida para facilitar a 
 
 ## 📸 Screenshots
 
-<img src="public/dashboard.png" width="400px" alt="Dashboard" style="margin: 10px; border-radius: 8px;"/> 
-<img src="public/erros.png" width="400px" alt="Erros page"style="margin: 10px; border-radius: 8px;"/>
-<img src="public/collections-history.png" width="400px" alt="Collects page" style="margin: 10px; border-radius: 8px;"/>
+<img src="public/dashboard.png" width="100%" alt="Dashboard" style="margin: 10px; border-radius: 8px;"/> 
+<img src="public/erros.png" width="100%" alt="Erros page"style="margin: 10px; border-radius: 8px;"/>
+<img src="public/collections-history.png" width="100%" alt="Collects page" style="margin: 10px; border-radius: 8px;"/>
 
 ## 🚀 Rodando localmente
 
